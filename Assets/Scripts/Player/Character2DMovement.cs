@@ -213,6 +213,19 @@ public class Character2DMovement : MonoBehaviour
 	     *   * Rotating a local rotation by an axis: localRotation *= Quaternion.Euler(...)
 	     */
 	    
+	    if (mInput.move.x < 0.0f)
+		{
+			transform.localRotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+			// heading left now 
+			mHeadingRight = false;
+		}
+		else
+		{
+			transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+			// heading right now 
+			mHeadingRight = true;
+		}
+	    
 	    var animator = mSelector.charAnimator;
 	    if (animator != null)
 	    {
@@ -265,6 +278,14 @@ public class Character2DMovement : MonoBehaviour
 			 *   * Current Animator instance: *animator*
 			 *   * Animator methods: *SetFloat* and *SetBool*
 			 */
+			animator.SetFloat("Speed", speed);
+			animator.SetFloat("MoveSpeed", moveSpeed);
+			animator.SetBool("Crouch", crouch);
+			animator.SetBool("Grounded", grounded);
+			animator.SetBool("Jump", jump);
+			animator.SetBool("Fall", falling);
+			animator.SetFloat("Speed", speed);
+			
 	    }
     }
 }
